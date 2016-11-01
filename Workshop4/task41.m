@@ -1,20 +1,10 @@
 img = imread('small.png');
-%gimg = rgb2gray(img);
-
-imshow(img);
-
-imshow(img);
-colorbar;
-colormap gray;
 
 
-imagesc(img);
-colorbar;
-colormap gray;
+mi = min(min(img)); % Finds the minimum pizel intensity. Old Min
+ma = max(max(img)); % Old Max
 
-% So there are 8 greyscale levels
-mi = min(min(img));
-ma = max(max(img));
+
 
 L = ma - mi + 1;
 
@@ -34,23 +24,30 @@ for i = 1:L %Loops through the number of values
     Nk(i) = length(frequency); % Length is the number of elements within the frequency array. (Freqency is a colum vector displaying the linear positions of the given intensity level)
 end
 
-bar(pixel_Value,Nk, 0.2);
-% So now bar displays
-% pixelValue for the x coordinate, Nk for the y coordinate (frequency), and 20% width
+
+r = size(img,1);
+c = size(img,2);
+
+
+imgout = uint8(zeros(size(img)));
+
+n = r * c; % Size
+nk = zeros(256,1); % Creates a column vector % look at word doc
+nCum = zeros(256,1); % Sigma
+out = zeros(256,1);
 
 
 
+for i = 1:r
+    for j = 1:c
+        value = img(i,j);
+        nk(value + 1) = nk(value+1) + 1;     
+    end
+end
 
 
 
-
-
-
-
-
-
-
-
+        
 
 
 
