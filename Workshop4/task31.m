@@ -51,7 +51,7 @@ title('Original');
 
 subplot(2,2,2);
 imshow(imgTrans);
-title('Equalised');
+title('Stretched');
 
 subplot(2,2,3);
 imhist(img,200);
@@ -59,7 +59,7 @@ title('Original Histogram');
 
 subplot(2,2,4);
 imhist(imgTrans,200);
-title('Equalised Histogram');
+title('Stretched Histogram');
 
 
 
