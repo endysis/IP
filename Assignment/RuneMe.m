@@ -90,7 +90,7 @@ end
 
 
 
-
+% Step 4
 ID = 255*im2double(IF);
 
 mi = min(min(ID)); % Finds the minimum pizel intensity. Old Min
@@ -144,6 +144,9 @@ end
 
 %BW = im2bw(ICS,0.2);
 
+
+
+% Task 6  - Understand how errode works
 se = strel('square',3);
 
 errI = imerode(ICS,se);
