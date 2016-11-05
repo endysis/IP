@@ -92,7 +92,6 @@ for i = 2:size(ID,1)-1
     end
 end
 
-
 SI = zeros(size(ID));
 
 for x = 1:size(ID,1)
@@ -108,7 +107,6 @@ for x = 1:size(ID,1)
         SOut(x,y) = ID(x,y) + SI(x,y); % Add to
     end
 end
-
 
 
 
