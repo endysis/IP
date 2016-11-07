@@ -78,8 +78,50 @@ imshow(IF); % Result
 x = size(IG,1); % Size of the gray image X
 y = size(IG,2); % Size of the gray image Y
 IG = padarray(IG,[1,1]); % Funtions which pads the array
+
+%---------------------------------------------------------
+% Testing
+
+% Shows original
+figure
+imshow(IG);
+
+% Median
+IMed = medfilt2(IG); % Function performs a median filter
+
+% Mean
+H = fspecial('average',[3,3]);
+IM = imfilter(IG,H);
+
+% Gausian
+IGau = imgaussfilt(IG,2);
+
+% Wiener
+IW = wiener2(IG,[3,3]);
+
+figure
+subplot(2,2,1);
+imshow(IMed);
+title('Median Filter');
+
+subplot(2,2,2);
+imshow(IM);
+title('Mean Filter');
+
+subplot(2,2,3);
+imshow(IGau);
+title('Gausian Filter');
+
+subplot(2,2,4);
+imshow(IW);
+title('Wiener Filter');
+
+%---------------------------------------------------------
+
+
 IG = medfilt2(IG); % Function performs a median filter
 IF = zeros(x,y,'uint8'); % uint8 because range 0 - 255
+
 
 x1 = 1; % Counter for new picture coordinates.
 y1 = 1;
