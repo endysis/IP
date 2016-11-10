@@ -306,7 +306,7 @@ imshow(ICS);
 
 
 
-area_p = regionprops(ICS,'Area','Perimeter','Centroid','MajorAxisLength','MinorAxisLength');
+area_p = regionprops(ICS,'Area','Perimeter','Centroid','MajorAxisLength','MinorAxisLength','PixelList');
 
 
 outCol = zeros(4,1);
@@ -336,20 +336,11 @@ figure
 imshow(ICS);
 
 
-x = size(ICS,1); % Size of the gray image X
-y = size(ICS,2); % Size of the gray image Y
-out = zeros(x,y);
 
 
 for x = 1:size(outCol,1)
-    temp = (L == outCol(x));
-    out = out + temp;
+    out = out + (label == x);
 end
-
-
-
-figure
-imshow(out);
 
 
 

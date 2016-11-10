@@ -1,0 +1,77 @@
+Histogram Equalisation
+
+imhist
+
+256 possible variations in the image.
+More concentrated towards the 256 value side.
+The image is thereofre bright.
+We could do with  to outline the starfishes more.
+
+
+
+Distributing the intensities of intensity values in uniform manner. 
+
+Almost similar amount of pixels for every brightness range.
+For hish contrast image.
+
+Histogram components are distributed over all intensity range for a high constrast.
+
+
+
+So it increases the contrast of the image.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
