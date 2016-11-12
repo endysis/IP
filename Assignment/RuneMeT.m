@@ -216,7 +216,7 @@ ICS = J;
 ICS = mat2gray(ICS); % Convert all to 1s and 0s
 
 
-level = round(graythresh(ICS),1);
+level = graythresh(ICS);
 
 
 % Manual
@@ -233,7 +233,7 @@ end
 %}
 
 % Inbulit
-ICS = im2bw(ICS,level);
+ICS = im2bw(ICS,0.7);
 ICS = ~ICS;
 
 %{

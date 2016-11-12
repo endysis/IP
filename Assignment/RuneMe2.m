@@ -179,21 +179,25 @@ J = imadjust(IF,stretchlim(IF),[]);
 
 
 figure;
-subplot(2,2,1);
+subplot(2,3,1);
 imhist(IF);
 title('Original');
 
-subplot(2,2,2);
+subplot(2,3,2);
 imhist(ICS);
 title('Histogram Equalisation');
 
-subplot(2,2,3);
+subplot(2,3,3);
 imhist(J);
 title('Contrast Stretching');
 
-subplot(2,2,4);
+subplot(2,3,4);
 imshow(J);
 title('Contrast Stretching');
+
+subplot(2,3,5);
+imshow(ICS);
+title('Histogram equalisation');
 
 
 ICS = J;
@@ -216,7 +220,7 @@ ICS = J;
 ICS = mat2gray(ICS); % Convert all to 1s and 0s
 
 
-level = round(graythresh(ICS),1);
+level = graythresh(ICS);
 
 
 % Manual
@@ -233,7 +237,7 @@ end
 %}
 
 % Inbulit
-ICS = im2bw(ICS,level);
+ICS = im2bw(ICS,0.7);
 ICS = ~ICS;
 
 %{
@@ -256,17 +260,20 @@ se = strel('square',4);
 sk = strel('disk',4);
 %}
 
-se = strel('square',4);
-sk = strel('disk',4);
+sk = strel('square',4);
+se = strel('disk',4);
+
 
 
 
 %errI = imerode(BW,se);
 %ICS = imopen(ICS,se);
+ICS = imclose(ICS,se);
 %ICS = imdilate(ICS,se);
 
-ICS = imerode(ICS,se);
-ICS = imdilate(ICS,sk);
+%ICS = imdilate(ICS,sk);
+%ICS = imerode(ICS,se);
+
 
 
  % 4 disk vs 8 disk
@@ -290,15 +297,15 @@ imshow(ICS);
 %ICS = edge(ICS,'Sobel');
 
 
-se = strel('square',4);
-sk = strel('disk',4);
+se = strel('disk',4);
+sk = strel('disk',2);
 
 %ICS = imerode(ICS,se);
 
 %ICS = imdilate(ICS,sk);
 
 
-%ICS = imfill(ICS,'holes');
+ICS = imfill(ICS,'holes');
 
 
 figure
@@ -307,7 +314,6 @@ imshow(ICS);
 
 
 area_p = regionprops(ICS,'Area','Perimeter','Centroid','MajorAxisLength','MinorAxisLength');
-
 
 outCol = zeros(4,1);
 colC = 1;
@@ -321,7 +327,7 @@ size(area_p,1)
 
 for x = 1:size(area_p,1)    
     currMetric = 4*pi*area_p(x).Area/area_p(x).Perimeter.^2;
-    if currMetric > 0.4
+    if currMetric > 0.35
         centers = area_p(x).Centroid;
         diameters = mean([area_p(x).MajorAxisLength area_p(x).MinorAxisLength],2);
         radii = diameters/2;
@@ -332,8 +338,8 @@ for x = 1:size(area_p,1)
     end
 end
 
-figure
-imshow(ICS);
+%figure
+%imshow(ICS);
 
 
 x = size(ICS,1); % Size of the gray image X
