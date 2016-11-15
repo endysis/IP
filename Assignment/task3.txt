@@ -42,7 +42,6 @@ Result Comparison.
 Own functions vs inBuilt function
 
 
-
 Non linear
 Median filter
 
@@ -51,8 +50,6 @@ Linear - we replace every pixel with a linear combination of its neighbors
 Averaging is linear because every new pixel is a  linear combination of the old pixels. 
 
 Mean Filter
-
-
 
 
 

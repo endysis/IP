@@ -32,6 +32,42 @@ So it increases the contrast of the image.
 
 
 
+Step 4
+
+Histogram equalisation has been used to enhance the contrast of the image. The method outputs the images intensity levels by aproximation of thier probability of occurrance. As displayed in figure 1 the orignal image has histogram components which are localised to high intensity values. As shown in the HE algorithm, the probability of the starfishes intensity is high which has made output of each starfish darker. This aids in their segmentation from the rest of the image. However because of the uniform manner in which histogram equaltion distrubtes its pixel intesites, areas around the starfish have become more deatilaid and darker in constrast.
+
+Since the images intesity levels are narrowly localised around the higher end of the intensity spectrum, contrast stretching has subitly expanded the narrow range making the pixel intenisities subtly darker. Unlike histogram equalisation this has not aggresivly made background areas darker in contrast but has slighly increased the darkness of the starfish. 
+
+However, contrast streching has stretched already dark pixel intensities of large artifacts to darker range (lower than starfish). Although histogram equalisation atcs in a similar way, the high probability of each starfishes intenstiy leads to a their darker output. From this, using histogram equalisation returns more definition to each starfish over contrast stretching.
+
+Logarithmic transformation
+
+
+
+
+
+
+
+
+
+
+
+In binarisation a high threshold can therefore be given which will remove 
+
+
+
+In step 5 the binary threshold and will need to be lower in order to retain structure of the starfish therefore keeping other artifacts. Since Hiogram equaliastion increases range across 
+
+
+
+Morpholgical processing can be used to remove small dark background detail whilst still retaing the shape of each starfish.
+
+
+
+
+
+
+
 
 
 

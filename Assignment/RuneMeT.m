@@ -166,34 +166,40 @@ title('Equalised Histogram');
 
 
 
-
-
-
-
 %--------Testing---------------------
 
 
 Low_High = stretchlim(IF);
 J = imadjust(IF,stretchlim(IF),[]);
 
+G = imadjust(IF,[],[],0.5);
+
 
 
 figure;
-subplot(2,2,1);
+subplot(3,3,1);
 imhist(IF);
 title('Original');
 
-subplot(2,2,2);
+subplot(3,3,2);
 imhist(ICS);
 title('Histogram Equalisation');
 
-subplot(2,2,3);
+subplot(3,3,3);
 imhist(J);
 title('Contrast Stretching');
 
-subplot(2,2,4);
+subplot(3,3,4);
 imshow(J);
 title('Contrast Stretching');
+
+subplot(3,3,5);
+imshow(G);
+title('Gamma');
+
+subplot(3,3,6);
+imhist(G);
+title('Gamma');
 
 
 ICS = J;
