@@ -2,7 +2,8 @@ img = imread('small.png');
 
 
 mi = min(min(img)); % Finds the minimum pizel intensity. Old Min
-ma = max(max(img)); % Old Max
+ma = max(max(img)); % O
+%ld Max
 
 
 

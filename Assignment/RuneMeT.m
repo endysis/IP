@@ -177,29 +177,27 @@ G = imadjust(IF,[],[],0.5);
 
 
 figure;
-subplot(3,3,1);
-imhist(IF);
-title('Original');
-
-subplot(3,3,2);
-imhist(ICS);
+subplot(2,3,1);
+imshow(ICS);
 title('Histogram Equalisation');
 
-subplot(3,3,3);
-imhist(J);
-title('Contrast Stretching');
-
-subplot(3,3,4);
+subplot(2,3,2);
 imshow(J);
 title('Contrast Stretching');
 
-subplot(3,3,5);
+subplot(2,3,3);
 imshow(G);
-title('Gamma');
+title('Gamma Correction');
 
-subplot(3,3,6);
+subplot(2,3,4);
+imhist(ICS);
+
+subplot(2,3,5);
+imhist(J);
+
+subplot(2,3,6);
 imhist(G);
-title('Gamma');
+
 
 
 ICS = J;
@@ -211,7 +209,7 @@ ICS = J;
 %----------------------------------------------------------------------
 
 
-
+%{
 
 %----------------------------------------------------------------------
 % Task 5
@@ -371,7 +369,7 @@ imshow(out);
 % https://uk.mathworks.com/help/images/ref/bwboundaries.html
 
 
-
+%}
 
 
 

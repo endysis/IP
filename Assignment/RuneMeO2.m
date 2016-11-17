@@ -9,9 +9,10 @@ imshow(I);
 title('Step-1: Load input image');
 %----------------------------------------------------------------------
 
-
-
-%----------------------------------------------------------------------
+U = imread('Pout.png');
+U = rgb2gray(U);
+ 
+%---------------------------------------------------------------------
 % Step-2: Conversion of input image to greyscale
 % for you to fill in ??????????
 IG = rgb2gray(I);  % Can I use this? IG == Image Gray
@@ -70,25 +71,50 @@ title('Median Filter');
 %----------------------------------------------------------------------
 % Step 4
 
-ID = 255*im2double(IF);
 
-mi = min(min(ID)); % Finds the minimum pizel intensity. Old Min
-ma = max(max(ID)); % Old Max
 
-ICS = histeq(IF); % Histogram equalisation
+r = size(IF,1);
+c = size(IF,2);
 
-% Contrast Stretching
-Low_High = stretchlim(IF);
-J = imadjust(IF,stretchlim(IF),[]);
+imgHist = uint8(zeros(r,c));
 
-%ICS = J;
+n = r * c;
 
-%J = imadjust(ICS,[],[],0.5);
+f = zeros(256,1);
+pdf = zeros(256,1); % Probability
+cdf = zeros(256,1); % Culumatie Probability Frequency
+cum = zeros(256,1); % Cumlative Frequency
+outPut = zeros(256,1); % 
 
-figure
-imshow(J);
+for i = 1:r
+    for j = 1:c
+        value = IF(i,j);
+        f(value + 1) = f(value + 1)+1; % Adds one each time to the given value is found within the matrix. 
+    end
+end
 
-ICS = J;
+for k = 1:8
+    pdf(k) = f(k)/n; %  finds the number of times the value occurs(frequency column) and divides by the number of items in the matrix
+end
+
+sum = 0;
+L = 255;
+
+for i = 1:size(pdf)
+    sum = sum + f(i); 
+    cum(i) = sum; % Adding cumlative frequency
+    cdf(i) = cum(i)/n; % Using the above adding probability culmlative frequency.
+    outPut(i) = round(cdf(i)*L);  % Rounds the value
+end
+
+for i = 1:r
+    for j = 1:c
+        imgHist(i,j) = outPut(IF(i,j)+1);  % Finds the value (position) in out and returns the colorating out value.
+    end
+end
+
+
+ICS = imgHist;
 
 figure
 imshow(ICS);
@@ -100,31 +126,35 @@ title('Image Enhancement');
 %----------------------------------------------------------------------
 % Task 5
 
-%ICS = mat2gray(ICS); % Convert all to 1s and 0s
+ICS = mat2gray(ICS); % Convert all to 1s and 0s
 
 level = graythresh(ICS);
+
+%IF = im2double(IF);
 
 %{
 for i = 1:size(ICS,1)
     for j = 1:size(ICS,2)
-        if ICS(i,j) < 70
-            ICS(i,j) = 255;
+        if ICS(i,j) < 0.31
+            ICS(i,j) = 1;
         else
             ICS(i,j) = 0;
         end 
     end
 end
+
+ % Convert all to 1s and 0s
 %}
-
-ICS = mat2gray(ICS); % Convert all to 1s and 0s
-
-ICS = im2bw(ICS,0.8);
+ 
+ICS = im2bw(ICS,0.31);
 ICS = ~ICS;
+ 
 
 figure
 imshow(ICS)
 title('Binary Image');
 %----------------------------------------------------------------------
+
 
 %----------------------------------------------------------------------
 % Task 6  
@@ -152,28 +182,12 @@ imshow(ICS);
 %----------------------------------------------------------------------
 %Task 7
 
-%Sobel
-%ICS = edge(ICS,'Sobel');
-
-
-%se = strel('square',6);
-%sk = strel('disk',6);
-
-
-%ICS = imerode(ICS,se);
-%ICS = imdilate(ICS,sk);
-
-
 ICS = imfill(ICS,'holes');
-
 
 figure
 imshow(ICS);
 
-
-
 area_p = regionprops(ICS,'Area','Perimeter','Centroid','MajorAxisLength','MinorAxisLength');
-
 
 outCol = zeros(4,1);
 colC = 1;
@@ -189,10 +203,9 @@ max(max(L))
 size(area_p,1);  
 
 
-
 for x = 1:size(area_p,1)    
     currMetric = 4*pi*area_p(x).Area/area_p(x).Perimeter.^2;
-    if (currMetric >= 0.2) && (currMetric <= 0.28) 
+    if (currMetric >= 0.2) && (currMetric <= 0.3) 
         centers = area_p(x).Centroid;
         diameters = mean([area_p(x).MajorAxisLength area_p(x).MinorAxisLength],2);
         radii = diameters/2;

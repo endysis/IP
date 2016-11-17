@@ -2,16 +2,10 @@ Step 3
 
 What spatial filter I have used and results
 
-- A Median Filter has been used to remove the salt and pepper noise within the image. As displayed in figure 1, the filter has worked well to remove the oulier pixels whilst retaing overall image quality. How it works, in built vs own made
-
-
+- A Median Filter has been used to remove the salt and pepper noise within the image. As displayed in figure 1, the filter has worked well to remove the oulier pixels whilst retaing overall image quality. The median filter determines each output value based on the pixels neighbourhood. The filter computes the median value from the neghbourhoodlist (including the input value), subsequenlty changing the input pixel with the median value.
 
 Padding
 - Zero padding has been used. The median filter therefore has full covereage of the image including it corners and sides. Alternativly the image could be cropped. However this would reduce PPI losing image detail.
-
-"The most common way to handle this problem is to padfwith as many Os as are necessary to guarantee that there will always be corresponding points for the full excursion of w past f."
-
-
 
 Why
 
@@ -20,21 +14,16 @@ Alternatives
 Mean Filter:
 - When testing an mean filter, output displays grey specks in similar positions to the salt and peper noise. This is due to the linear filter being more sensitve to the 0 and 255 outliers. Pixels true to the origail image are being influenced by oulier pixels in thier neighbourhood. With its trait of selecting the middle value within a pixels neighbour hood a median filter is less sensitive to these outliers and therefore in this case a better choice for noise removal than the mean filter.
 
-"The median is much less sensitive than the mean to extreme values (called outliers). Median filtering is therefore better able to remove these outliers without reducing the sharpness of the image."
-
-
 - Gausian Filter
 A Gausian filter seems to remove the salt and pepper noise however does not preseve edges of the image as well as the median filter. In terms of speed the linear trait of the gausian algorithm is likely to be faster than median filter's non linear sorting process. However maintence of detail is crucial in later stages i.e. identifying the starfishes. As a result detail over speed is an accepted trade off. 
 
 - Wiener Filter 
 A Wiener filter has been used to determine if the taiolring of local image variance removes more noise than a median filter. It seems when defining a 3 by 3 neighbourhood, the wiener filter has relitivly poor performace removing a smal amount of salt and ppper noise. 
 
-The filter however is better than the median filter at preseving edges.
+The filter however is better than the median filter at preseving edges this is due to 
 
 
 - Slowest
-
-
 
 Result Comparison.
 

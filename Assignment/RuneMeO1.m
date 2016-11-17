@@ -77,19 +77,6 @@ ma = max(max(ID)); % Old Max
 
 ICS = histeq(IF); % Histogram equalisation
 
-% Contrast Stretching
-Low_High = stretchlim(IF);
-J = imadjust(IF,stretchlim(IF),[]);
-
-%ICS = J;
-
-%J = imadjust(ICS,[],[],0.5);
-
-figure
-imshow(J);
-
-ICS = J;
-
 figure
 imshow(ICS);
 title('Image Enhancement');
@@ -116,15 +103,17 @@ for i = 1:size(ICS,1)
 end
 %}
 
+
 ICS = mat2gray(ICS); % Convert all to 1s and 0s
 
-ICS = im2bw(ICS,0.8);
+ICS = im2bw(ICS,0.31);
 ICS = ~ICS;
 
 figure
 imshow(ICS)
 title('Binary Image');
 %----------------------------------------------------------------------
+
 
 %----------------------------------------------------------------------
 % Task 6  
@@ -152,28 +141,12 @@ imshow(ICS);
 %----------------------------------------------------------------------
 %Task 7
 
-%Sobel
-%ICS = edge(ICS,'Sobel');
-
-
-%se = strel('square',6);
-%sk = strel('disk',6);
-
-
-%ICS = imerode(ICS,se);
-%ICS = imdilate(ICS,sk);
-
-
 ICS = imfill(ICS,'holes');
-
 
 figure
 imshow(ICS);
 
-
-
 area_p = regionprops(ICS,'Area','Perimeter','Centroid','MajorAxisLength','MinorAxisLength');
-
 
 outCol = zeros(4,1);
 colC = 1;
@@ -189,10 +162,9 @@ max(max(L))
 size(area_p,1);  
 
 
-
 for x = 1:size(area_p,1)    
     currMetric = 4*pi*area_p(x).Area/area_p(x).Perimeter.^2;
-    if (currMetric >= 0.2) && (currMetric <= 0.28) 
+    if (currMetric >= 0.2) && (currMetric <= 0.3) 
         centers = area_p(x).Centroid;
         diameters = mean([area_p(x).MajorAxisLength area_p(x).MinorAxisLength],2);
         radii = diameters/2;
