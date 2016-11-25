@@ -146,7 +146,7 @@ end
  % Convert all to 1s and 0s
 %}
  
-ICS = im2bw(ICS,0.31);
+ICS = im2bw(ICS,level);   % 0.31
 ICS = ~ICS;
  
 

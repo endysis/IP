@@ -1,0 +1,40 @@
+Segmenting the image into a foreground and a background. Image objects could bn segmented using edge based algorithms such as the prewit or sobel, however such algorithms do not split the image into two prodominat types and would pick up the edges of unwanted backgroud detail. Segmenting requires thresholding-based segmentaion. This concept selects a given threshold 't' and evaluates every pixels within the image against 't'. If a given pixel value is above t then the value is mark as '1' (an object) else the pixel is marked as 0 (backgorund). The in built Matlab function im2Bw is used. This method executes as described in the matLab comments. In order to select a threshold 
+
+
+
+
+
+
+
+
+
+such functions return boundaries between regions, thrsholding segmentent the image into two prodominant types, 0s and 1s.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Binary Fucntion
+Threshold I have used and why
+Compare two different thresholds
+
+
+
+
+
+
+ %In using the the canny edge detector using (which has the Hysteresis threshold) the backgoud edges would not be removed since thier intesities are high as a result of the histogram equalisation.%
+ 
+ 
+ 
+ 
+ 
