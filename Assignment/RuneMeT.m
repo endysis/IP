@@ -4,9 +4,9 @@ close all;
 %----------------------------------------------------------------------
 % Step-1: Load input image
 I = imread('AssignmentInput.jpg');
-%figure;
-%imshow(I);
-%title('Step-1: Load input image');
+figure;
+imshow(I);
+title('Load input image','FontSize',30);
 %----------------------------------------------------------------------
 
 
@@ -15,9 +15,9 @@ I = imread('AssignmentInput.jpg');
 % Step-2: Conversion of input image to greyscale
 % for you to fill in ??????????
 IG = rgb2gray(I);  % Can I use this? IG == Image Gray
-%figure;
-%imshow(IG);
-%title('Step-2: Conversion of input image to greyscale');
+figure;
+imshow(IG);
+title('Conversion of input image to greyscale','FontSize',30);
 %----------------------------------------------------------------------
 
 
@@ -96,19 +96,19 @@ IW = wiener2(IG,[3,3]);
 figure
 subplot(2,2,1);
 imshow(IMed);
-title('Median Filter');
+title('Median Filter','FontSize',30);
 
 subplot(2,2,2);
 imshow(IM);
-title('Mean Filter');
+title('Mean Filter','FontSize',30);
 
 subplot(2,2,3);
 imshow(IGau);
-title('Gausian Filter');
+title('Gausian Filter','FontSize',30);
 
 subplot(2,2,4);
 imshow(IW);
-title('Wiener Filter');
+title('Wiener Filter','FontSize',30);
 
 %---------------------------------------------------------
 
@@ -150,19 +150,19 @@ ICS = histeq(IF); % Histogram equalisation  Why??
 figure;
 subplot(2,2,1);
 imshow(IF);
-title('Original');
+title('Original','FontSize',30);
 
 subplot(2,2,2);
 imshow(ICS);
-title('Equalised');
+title('Equalised','FontSize',30);
 
 subplot(2,2,3);
 imhist(IF);
-title('Original Histogram');
+title('Original Histogram','FontSize',30);
 
 subplot(2,2,4);
 imhist(ICS);
-title('Equalised Histogram');
+title('Equalised Histogram','FontSize',30);
 
 
 
@@ -174,20 +174,18 @@ J = imadjust(IF,stretchlim(IF),[]);
 
 G = imadjust(IF,[],[],0.5);
 
+G1 = imadjust(IF,[],[],1.5);
+
 
 
 figure;
 subplot(2,3,1);
 imshow(ICS);
-title('Histogram Equalisation');
+title('Histogram Equalisation','FontSize',30);
 
 subplot(2,3,2);
 imshow(J);
-title('Contrast Stretching');
-
-subplot(2,3,3);
-imshow(G);
-title('Gamma Correction');
+title('Contrast Stretching','FontSize',30);
 
 subplot(2,3,4);
 imhist(ICS);
@@ -195,12 +193,39 @@ imhist(ICS);
 subplot(2,3,5);
 imhist(J);
 
-subplot(2,3,6);
+
+
+subplot(2,2,1);
+imshow(G);
+title('Gamma Correction (Compression)','FontSize',30);
+
+
+subplot(2,2,2);
+imshow(G1);
+title('Gamma Correction (Expansion)','FontSize',30);
+
+subplot(2,2,3);
 imhist(G);
+title('Gamma Correction Histogram (Compression)','FontSize',30);
+
+subplot(2,2,4);
+imhist(G1);
+title('Gamma Correction Histogram (Expansion)','FontSize',30);
+
+
+
 
 
 
 ICS = J;
+
+
+
+
+
+
+
+
 
 
 %figure

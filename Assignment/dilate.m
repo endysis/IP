@@ -29,9 +29,9 @@ for x = 3:size(img,1) -2
             yy = -2;  % Reset Y
             for j = 1:size(se,2)
                 if se(i,j) == 1 % If it finds a point in the kernal which is == to one. 
-                   if img(x+xx,y+yy) ~= se(i,j) % Okay, if the corresponding pixel value in the image == 1
+                   if img(x+xx,y+yy) == se(i,j) % Okay, if the corresponding pixel value in the image == 1
                        
-                         imgOut(x,y) = 0; % if not (then its 0) andChange the evauating pixel to 0
+                         imgOut(x,y) = 1; % if not (then its 0) andChange the evauating pixel to 0
                          breakCheck = 1; % the pixel is now 0
                          break % so we can now break out of the loop
                    end
@@ -49,7 +49,7 @@ end
 
 
 seF = strel('disk',2);
-img = imerode(img,seF);
+img = imdilate(img,seF);
 
 figure
 imshow(img);
@@ -57,38 +57,6 @@ imshow(img);
 
 figure
 imshow(imgOut);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

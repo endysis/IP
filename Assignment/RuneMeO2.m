@@ -146,7 +146,7 @@ end
  % Convert all to 1s and 0s
 %}
  
-ICS = im2bw(ICS,level);   % 0.31
+ICS = im2bw(ICS,0.31);   % 
 ICS = ~ICS;
  
 
@@ -157,26 +157,69 @@ title('Binary Image');
 
 
 %----------------------------------------------------------------------
-% Task 6  
+% Task 6
 
-%{
-se = strel('square',4);
-sk = strel('disk',4);
-%}
+% Errode Function
+
+se = [0,0,1,0,0; 0,1,1,1,0; 1,1,0,1,1; 0,1,1,1,0; 0,0,1,0,0;]; % disk 2
+
+ICS = padarray(ICS,[2,2],0);
+ICSE = ICS;
+
+c = 0;
+
+xx = -2;
+yy = -2;
+
+breakCheck = 0; % checks if it can exit the structing element
+
+for x = 3:size(ICS,1) -2
+    for y = 3:size(ICS,2) -2
+
+        breakCheck = 0;
+        xx = -2; % Reset X
+        for i = 1:size(se,1)  % size of the 
+            yy = -2;  % Reset Y
+            for j = 1:size(se,2)
+                if se(i,j) == 1 % If it finds a point in the kernal which is == to one. 
+                   if ICS(x+xx,y+yy) ~= se(i,j) % Okay, if the corresponding pixel value in the image == 1
+                       
+                         ICSE(x,y) = 0; % if not (then its 0) andChange the evauating pixel to 0
+                         breakCheck = 1; % the pixel is now 0
+                         break % so we can now break out of the loop
+                   end
+                end
+                   yy = yy + 1;
+            end
+            if breakCheck == 1 %Stop evaluating if it has found a neighbourhood pixel which is 0
+                break
+            end
+            xx = xx + 1;
+        end 
+    end
+end
 
 
-se = strel('disk',2);
+ICS = ICSE;
+
+figure
+imshow(ICS)
+title('Erode');
+
+
+
+% Dilate Function
+
 sk = strel('square',4);
-
-ICS = imerode(ICS,se);
 ICS = imdilate(ICS,sk);
-
-
-% 4 disk vs 8 disk
 
  
 figure
 imshow(ICS);
+
+
+
+
 %----------------------------------------------------------------------
 
 %----------------------------------------------------------------------
@@ -228,6 +271,8 @@ for x = 1:size(outCol,1)
     temp = (L == outCol(x));
     out = out + temp;
 end
+
+
 
 
 
