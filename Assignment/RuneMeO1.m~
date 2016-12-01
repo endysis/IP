@@ -144,47 +144,41 @@ ICST2 = ICS;
 se = strel('disk',2);
 sk = strel('square',4);
 
-
-
-
-seT2 = strel('disk',2);
+seT2 = strel('disk',4);
 seT3 = strel('square',5);
 seT4 = strel('square',3);
 
 
 ICS = imerode(ICS,se);
-ICST0 = imerode(ICST0,se);
-ICST1 = imerode(ICST1,se);
-ICST2 = imerode(ICST2,se);
 
 
 ICS = imdilate(ICS,sk);
-ICST0 = imdilate(ICST0,seT2);
-ICST1 = imdilate(ICST1,seT3);
-ICST2 = imdilate(ICST2,seT4);
+ICST0 = imdilate(ICS,seT2);
+ICST1 = imdilate(ICS,seT3);
+ICST2 = imdilate(ICS,seT4);
 
 
 figure
 subplot(2,2,1)
 imshow(ICS)
-title('Dilation Square Size 4x4','FontSize',40);
+title('Dilation Square Size 4x4'','FontSize',40);
 
 
 subplot(2,2,2)
 imshow(ICST0)
-title('Dilation Disk Size 5x5','FontSize',40);
+title('Dilation Disk Size 4x4','FontSize',40);
 
 
 subplot(2,2,3)
 imshow(ICST1)
-title('Dilation Square size 5x5','FontSize',40);
+title('Erosion Square size 5x5','FontSize',40);
 
 
 subplot(2,2,4)
 imshow(ICST2)
-title('Dilation Square size 3x3','FontSize',40);
-%}
-%{
+title('Erosion Disk size 7x7','FontSize',40);
+
+
 
 
 
@@ -320,7 +314,7 @@ imshow(out);
 
 
 
-%}
+
 
 
 

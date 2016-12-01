@@ -1,4 +1,5 @@
 % MATLAB script for Assessment Item-1
+
 close all;
 
 %----------------------------------------------------------------------
@@ -179,18 +180,18 @@ G1 = imadjust(IF,[],[],1.5);
 
 
 figure;
-subplot(2,3,1);
+subplot(2,2,1);
 imshow(ICS);
 title('Histogram Equalisation','FontSize',30);
 
-subplot(2,3,2);
+subplot(2,2,2);
 imshow(J);
 title('Contrast Stretching','FontSize',30);
 
-subplot(2,3,4);
+subplot(2,2,3);
 imhist(ICS);
 
-subplot(2,3,5);
+subplot(2,2,4);
 imhist(J);
 
 
@@ -217,11 +218,7 @@ title('Gamma Correction Histogram (Expansion)','FontSize',30);
 
 
 
-ICS = J;
-
-
-
-
+%ICS = J;
 
 
 
@@ -252,6 +249,10 @@ ICS = mat2gray(ICS); % Convert all to 1s and 0s
 
 level = graythresh(ICS);
 
+figure
+imhist(ICS)
+title('Histogram 0 1');
+
 
 % Manual
 %{
@@ -269,7 +270,7 @@ end
 % Inbulit
 
 
-ICS = im2bw(ICS,0.7);
+ICS = im2bw(ICS,0.31);
 ICS = ~ICS;
 
 %{
@@ -404,6 +405,7 @@ imshow(out);
 %}
 
 
+%}
 
 
 
