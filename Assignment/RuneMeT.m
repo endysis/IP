@@ -246,12 +246,14 @@ title('Gamma Correction Histogram (Expansion)','FontSize',30);
 
 ICS = mat2gray(ICS); % Convert all to 1s and 0s
 
+IT = ICS;
+
 
 level = graythresh(ICS);
 
 figure
 imhist(ICS)
-title('Histogram 0 1');
+
 
 
 % Manual
@@ -271,7 +273,9 @@ end
 
 
 ICS = im2bw(ICS,0.31);
+IT = im2bw(IT,level);
 ICS = ~ICS;
+IT = ~IT;
 
 %{
 BW = imbinarize(ICS,0.2); 
@@ -279,7 +283,14 @@ BW = ~BW;
 %}
 
 figure
+subplot(1,2,1);
+imshow(IT);
+title('Otsu Thresholding','FontSize',35);
+subplot(1,2,2);
 imshow(ICS);
+title('Manual Thresholding','FontSize',35);
+
+
 %----------------------------------------------------------------------
 
 

@@ -124,6 +124,10 @@ ICS = ~ICS;
 figure
 imshow(ICS)
 title('Binary Image');
+
+
+
+
 %----------------------------------------------------------------------
 
 
@@ -153,6 +157,9 @@ seT4 = strel('square',3);
 
 
 ICS = imerode(ICS,se);
+ICS = imdilate(ICS,sk);
+
+%{
 ICST0 = imerode(ICST0,se);
 ICST1 = imerode(ICST1,se);
 ICST2 = imerode(ICST2,se);
@@ -183,23 +190,20 @@ title('Dilation Square size 5x5','FontSize',40);
 subplot(2,2,4)
 imshow(ICST2)
 title('Dilation Square size 3x3','FontSize',40);
+
+
 %}
-%{
-
-
 
 
 %{
+
 seT1 = strel('square',5);
-
+seT2 = strel('disk',4);
 
 ICST1 = imerode(ICST1,seT1);
 ICST2 = imerode(ICST2,seT2);
-%}
 
 
-
-%{
 figure
 subplot(2,2,1)
 imshow(ICSTO)
@@ -219,10 +223,10 @@ title('Erosion Square size 5x5','FontSize',40);
 subplot(2,2,4)
 imshow(ICST2)
 title('Erosion Disk size 7x7','FontSize',40);
+
+
+
 %}
-
-
-
 
 
 
