@@ -6,7 +6,7 @@ close all;
 I = imread('AssignmentInput.jpg');
 figure;
 imshow(I);
-title('Task 1 : Load input image');
+title('Step-1: Load input image');
 %----------------------------------------------------------------------
 
 U = imread('Pout.png');
@@ -18,7 +18,7 @@ U = rgb2gray(U);
 IG = rgb2gray(I);  % Can I use this? IG == Image Gray
 figure;
 imshow(IG);
-title('Task 2 : Conversion of input image to greyscale');
+title('Step-2: Conversion of input image to greyscale');
 %----------------------------------------------------------------------
 
 
@@ -64,7 +64,7 @@ end
 
 figure
 imshow(IF); % Result
-title('Task 3 : Median Filter');
+title('Median Filter');
 
 %---------------------------------------------------------------------
 
@@ -118,7 +118,7 @@ ICS = imgHist;
 
 figure
 imshow(ICS);
-title('Task 4 : Image Enhancement Histogram Equalisation');
+title('Task 3 : Image Enhancement');
 
 %----------------------------------------------------------------------
 
@@ -143,7 +143,7 @@ title('Task 5 : Binary Image');
 
 % Errode Function
 
-se = [0,0,1,0,0; 0,1,1,1,0; 1,1,0,1,1; 0,1,1,1,0; 0,0,1,0,0;]; % disk size  2
+se = [0,0,1,0,0; 0,1,1,1,0; 1,1,0,1,1; 0,1,1,1,0; 0,0,1,0,0;]; % disk 2
 
 ICS = padarray(ICS,[2,2],0);
 ICSE = ICS;
@@ -209,6 +209,9 @@ title('Task 6 : Dilation (Opening)');
 
 ICS = imfill(ICS,'holes');
 
+figure
+imshow(ICS);
+
 area_p = regionprops(ICS,'Area','Perimeter','Centroid','MajorAxisLength','MinorAxisLength');
 
 outCol = zeros(4,1);
@@ -218,6 +221,8 @@ currMetric = 0;
 
 L = bwlabel(ICS);
 
+figure
+imshow(L);
 
 max(max(L))
 size(area_p,1);  
@@ -253,9 +258,23 @@ for x = 1:size(outCol,1)
 end
 
 
+
+
 figure
 imshow(out);
 title('Step-7: Starfish Atrifacts');
+
+
+
+
+
+
+
+
+
+
+
+% https://uk.mathworks.com/help/images/ref/bwboundaries.html
 
 
 
